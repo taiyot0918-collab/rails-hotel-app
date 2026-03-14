@@ -1,0 +1,101 @@
+<div class="room-show-container">
+  <%# 左側：施設情報 %>
+  <div class="room-details">
+    <div class="room-image-large">
+      <% if @room.room_image.attached? %>
+        <%= image_tag @room.room_image %>
+      <% else %>
+        <%= image_tag "default_icon.png" %>
+      <% end %>
+    </div>
+    
+    <div class="room-info-text">
+      <h2><%= @room.name %></h2>
+      <p class="room-price">¥<%= number_with_delimiter(@room.price) %> / 日</p>
+      <hr>
+      <h3>施設紹介</h3>
+      <p><%= @room.introduction %></p>
+      <p class="room-address">住所: <%= @room.address %></p>
+    </div>
+
+    <%# 編集・削除ボタン --- %>
+    <% if user_signed_in? && current_user == @room.user %>
+      <div class="room-admin-menu">
+        <%= link_to "施設情報を編集する", edit_room_path(@room), class: "btn-edit" %>
+        <button type="button" class="btn-delete-trigger" onclick="openDeleteModal()">この施設を削除する</button>
+      </div>
+    <% end %>
+
+
+  <%# --- 右側：予約フォームエリア --- %>
+  <div class="room-sidebar">
+    <div class="reservation-card-sticky">
+      <h3>予約申し込み</h3>
+      <%= form_with model: @reservation, url: confirm_reservations_path, local: true do |f| %>
+        <%= f.hidden_field :room_id, value: @room.id %>
+        
+        <div class="field">
+          <%= f.label :start_date, "チェックイン" %>
+          <%= f.date_field :start_date, class: "form-input", required: true %>
+        </div>
+
+        <div class="field">
+          <%= f.label :end_date, "チェックアウト" %>
+          <%= f.date_field :end_date, class: "form-input", required: true %>
+        </div>
+
+        <div class="field">
+          <%= f.label :person_count, "人数" %>
+          <%= f.number_field :person_count, class: "form-input", min: 1, required: true %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "予約確認画面へ進む", class: "btn-reservation-submit" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+    <div class="navigation-box">
+      <%= link_to "前のページへ戻る", :back, class: "simple-back-link" %>
+    </div>
+
+</div>
+
+<%# 削除確認モーダル --- %>
+<div id="deleteModal" class="modal-overlay" style="display: none;">
+  <div class="modal-content">
+    <h3 class="modal-title">施設を削除しますか？</h3>
+    
+    <div class="modal-room-preview">
+      <% if @room.room_image.attached? %>
+        <%= image_tag @room.room_image, class: "modal-img" %>
+      <% end %>
+      <div class="modal-info">
+        <p><strong>施設名:</strong> <%= @room.name %></p>
+        <p><strong>料金:</strong> ¥<%= number_with_delimiter(@room.price) %> / 日</p>
+      </div>
+    </div>
+    
+    <p class="warning-text">※削除すると、この施設に関連する予約データもすべて削除されます。この操作は取り消せません。</p>
+    
+    <div class="modal-actions">
+      <button onclick="closeDeleteModal()" class="btn-cancel">キャンセル</button>
+      <%# Rails 7以降でTurboを使用している場合は data: { turbo_method: :delete } %>
+      <%= link_to "削除を確定する", room_path(@room), data: { turbo_method: :delete }, class: "btn-danger-confirm" %>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openDeleteModal() {
+    document.getElementById('deleteModal').style.display = 'flex';
+  }
+  function closeDeleteModal() {
+    document.getElementById('deleteModal').style.display = 'none';
+  }
+  window.onclick = function(event) {
+    let modal = document.getElementById('deleteModal');
+    if (event.target == modal) { closeDeleteModal(); }
+  }
+</script>

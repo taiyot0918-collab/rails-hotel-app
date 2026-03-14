@@ -1,0 +1,34 @@
+<div class="container">
+  <h2>登録済み施設一覧</h2>
+
+  <table class="room-index-table">
+    <thead>
+      <tr>
+        <th>施設画像</th>
+        <th>施設名</th>
+        <th>紹介文</th>
+        <th>宿泊料金（/日）</th>
+        <th>作成日</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @rooms.each do |room| %>
+        <tr>
+          <td>
+            <% if room.room_image.attached? %>
+              <%= image_tag room.room_image, size: "100x60" %>
+            <% else %>
+              <%= image_tag "default_room.png", size: "100x60" %>
+            <% end %>
+          </td>
+          <%# 要件：施設名は詳細ページへのリンクとする %>
+          <td><%= link_to room.name, room_path(room) %></td>
+          <td><%= room.introduction %></td>
+          <td>¥<%= number_with_delimiter(room.price) %></td>
+          <%# 要件：作成日は yyyy/mm/dd 形式 %>
+          <td><%= room.created_at.strftime('%Y/%m/%d') %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

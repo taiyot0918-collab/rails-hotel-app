@@ -1,0 +1,97 @@
+<div class="container reservation-container">
+  <h2 class="section-title">ご予約済み施設一覧</h2>
+
+  <% if @reservations.any? %>
+    <div class="reservation-grid">
+      <% @reservations.each do |res| %>
+        <% room = res.room %>
+        <div class="reservation-card">
+          
+          <%# 施設画像エリア %>
+          <div class="res-card-image">
+            <% if room.room_image.attached? %>
+              <%= image_tag room.room_image %>
+            <% else %>
+              <%= image_tag "default_icon.png" %>
+            <% end %>
+            <span class="res-status-tag">予約確定</span>
+          </div>
+
+          <%# 予約詳細エリア %>
+          <div class="res-card-body">
+            <h3 class="res-room-name"><%= link_to room.name, room_path(room) %></h3>
+            
+            <div class="res-date-info">
+              <div class="res-date-box">
+                <span class="label">Check-in</span>
+                <span class="date"><%= res.start_date.strftime("%Y.%m.%d") %></span>
+              </div>
+              <div class="res-arrow">→</div>
+              <div class="res-date-box">
+                <span class="label">Check-out</span>
+                <span class="date"><%= res.end_date.strftime("%Y.%m.%d") %></span>
+              </div>
+            </div>
+
+            <div class="res-meta-info">
+              <p><i class="fas fa-users"></i> 宿泊人数: <strong><%= res.person_count %>名</strong></p>
+              <p><i class="fas fa-map-marker-alt"></i> <%= room.address %></p>
+            </div>
+
+            <%# 操作ボタン %>
+            <div class="res-card-actions">
+              <%= link_to "予約を変更", edit_reservation_path(res), class: "btn-edit-res" %>
+              <button class="btn-delete-res-trigger" onclick="openResModal('<%= res.id %>')">キャンセル</button>
+            </div>
+          </div>
+        </div>
+
+        <%# --- 削除確認モーダル（デザイン微調整） --- %>
+        <div id="resModal-<%= res.id %>" class="modal-overlay" style="display: none;">
+          <div class="modal-content res-delete-modal">
+            <h3 class="modal-title">予約をキャンセルしますか？</h3>
+            
+            <div class="modal-res-preview">
+              <% if room.room_image.attached? %>
+                <%= image_tag room.room_image, class: "modal-img-sm" %>
+              <% end %>
+              <div class="modal-res-details">
+                <p class="modal-room-name"><%= room.name %></p>
+                <p class="modal-res-dates">日程: <%= res.start_date.strftime("%m/%d") %> 〜 <%= res.end_date.strftime("%m/%d") %></p>
+              </div>
+            </div>
+            
+            <p class="warning-text">※キャンセルすると、この予約情報は完全に削除されます。</p>
+            
+            <div class="modal-actions">
+              <button onclick="closeResModal('<%= res.id %>')" class="btn-cancel">戻る</button>
+              <%= link_to "予約をキャンセルする", reservation_path(res), data: { turbo_method: :delete }, class: "btn-danger-confirm" %>
+            </div>
+          </div>
+        </div>
+        <%# -------------------------------------- %>
+
+      <% end %>
+    </div>
+  <% else %>
+    <div class="no-reservations">
+      <p>現在、ご予約済みの施設はありません。</p>
+      <%= link_to "施設を探して予約する", rooms_path, class: "btn-primary" %>
+    </div>
+  <% end %>
+</div>
+
+<script>
+  function openResModal(id) {
+    document.getElementById('resModal-' + id).style.display = 'flex';
+  }
+  function closeResModal(id) {
+    document.getElementById('resModal-' + id).style.display = 'none';
+  }
+  // モーダルの外側をクリックしても閉じるようにする
+  window.onclick = function(event) {
+    if (event.target.className === 'modal-overlay') {
+      event.target.style.display = 'none';
+    }
+  }
+</script>

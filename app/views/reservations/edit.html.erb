@@ -1,0 +1,36 @@
+<div class="auth-wrapper">
+  <div class="auth-card">
+    <h2 class="auth-title">予約内容の変更</h2>
+    
+    <div class="edit-room-summary">
+      <p>施設: <strong><%= @room.name %></strong></p>
+    </div>
+
+    <%= form_with model: @reservation, local: true do |f| %>
+      <%= f.hidden_field :room_id, value: @room.id %>
+      
+      <div class="field">
+        <%= f.label :start_date, "チェックイン" %>
+        <%= f.date_field :start_date, class: "form-input" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :end_date, "チェックアウト" %>
+        <%= f.date_field :end_date, class: "form-input" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :person_count, "人数" %>
+        <%= f.number_field :person_count, class: "form-input", min: 1 %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "予約を更新する", class: "btn-submit" %>
+      </div>
+    <% end %>
+
+    <div class="auth-links">
+      <%= link_to "キャンセル", reservations_path %>
+    </div>
+  </div>
+</div>

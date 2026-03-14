@@ -1,0 +1,33 @@
+<div class="container reservation-confirm">
+  <h2>予約内容の確認</h2>
+
+  <div class="confirm-box">
+    <h3>施設名: <%= @room.name %></h3>
+    
+    <div class="price-details">
+      <p>チェックイン: <%= @reservation.start_date.strftime('%Y/%m/%d') %></p>
+      <p>チェックアウト: <%= @reservation.end_date.strftime('%Y/%m/%d') %></p>
+      <p>宿泊日数: <%= @stay_days %> 日</p>
+      <p>人数: <%= @reservation.person_count %> 名</p>
+      <hr>
+      <p class="total-price"><strong>合計金額: ¥<%= number_with_delimiter(@total_price) %></strong></p>
+    </div>
+
+    <%# ★重要：urlを reservations_path にし、methodを post にする %>
+    <%= form_with model: @reservation, url: reservations_path, method: :post, local: true, data: { turbo: false } do |f| %>
+      
+      <%# ★超重要：これらがないと、確定ボタンを押した瞬間にデータが消えて保存に失敗します %>
+      <%= f.hidden_field :start_date %>
+      <%= f.hidden_field :end_date %>
+      <%= f.hidden_field :person_count %>
+      <%= f.hidden_field :room_id %> 
+
+      <div class="actions" style="margin-top: 20px;">
+        <%= f.submit "予約を確定する", class: "btn-reserve" %>
+        <div style="margin-top: 15px;">
+          <%= link_to "修正する（戻る）", :back %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

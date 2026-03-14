@@ -1,0 +1,40 @@
+<div class="auth-wrapper">
+  <div class="auth-card">
+    <h2 class="auth-title">施設情報の編集</h2>
+
+    <%= form_with model: @room, local: true do |f| %>
+      <div class="field">
+        <%= f.label :name, "施設名" %>
+        <%= f.text_field :name, class: "form-input" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :price, "宿泊料金" %>
+        <%= f.number_field :price, class: "form-input" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :address, "住所" %>
+        <%= f.text_field :address, class: "form-input" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :introduction, "施設紹介" %>
+        <%= f.text_area :introduction, class: "form-input", rows: 5 %>
+      </div>
+
+      <div class="field">
+        <%= f.label :room_image, "施設画像" %>
+        <%= f.file_field :room_image, class: "form-input" %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "変更を保存する", class: "btn-submit" %>
+      </div>
+    <% end %>
+
+    <div class="auth-links">
+      <%= link_to "キャンセルして戻る", room_path(@room) %>
+    </div>
+  </div>
+</div>

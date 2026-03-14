@@ -1,0 +1,101 @@
+<div class="main-hero-background"> <%# 背景画像のための親要素 %>
+  <div class="hero-translucent-capsule"> <%# 半透明のカプセル %>
+    <div class="hero-inner">
+      <h2 class="hero-title">最高の休日を見つけよう</h2>
+      
+      <%= form_with url: search_rooms_path, method: :get, local: true, class: "hero-search-form" do |f| %>
+        <div class="search-bar-integrated">
+          <%# キーワード入力 %>
+          <div class="search-input-wrapper">
+            <i class="fas fa-search"></i>
+            <%= text_field_tag :keyword, params[:keyword], placeholder: "キーワード（施設名・詳細）" %>
+          </div>
+
+          <div class="search-v-line"></div>
+
+          <%# エリア入力 %>
+          <div class="search-input-wrapper">
+            <i class="fas fa-map-marker-alt"></i>
+            <%= text_field_tag :address, params[:address], placeholder: "エリア（東京・札幌など）" %>
+          </div>
+
+          <%= f.submit "検索", class: "hero-search-btn" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<hr>
+<div class="area-section">
+  <h2 class="section-title">おすすめのエリア</h2>
+
+  <div class="area-container">
+    <%# 東京 %>
+    <%= link_to search_rooms_path(address: "東京"), class: "area-card" do %>
+      <%= image_tag "tokyo.jpg", alt: "東京" %>
+      <div class="area-info">
+        <h3>東京</h3>
+        <p><i class="fas fa-map-marker-alt"></i> Tokyo</p>
+      </div>
+    <% end %>
+    
+    <%# 大阪 %>
+    <%= link_to search_rooms_path(address: "大阪"), class: "area-card" do %>
+      <%= image_tag "osaka.jpg", alt: "大阪" %>
+      <div class="area-info">
+        <h3>大阪</h3>
+        <p><i class="fas fa-map-marker-alt"></i> Osaka</p>
+      </div>
+    <% end %>
+    
+    <%# 京都 %>
+    <%= link_to search_rooms_path(address: "京都"), class: "area-card" do %>
+      <%= image_tag "kyoto.jpg", alt: "京都" %>
+      <div class="area-info">
+        <h3>京都</h3>
+        <p><i class="fas fa-map-marker-alt"></i> Kyoto</p>
+      </div>
+    <% end %>
+
+    
+    <%# 札幌 %>
+    <%= link_to search_rooms_path(address: "札幌"), class: "area-card" do %>
+      <%= image_tag "sapporo.jpg", alt: "札幌" %>
+      <div class="area-info">
+        <h3>札幌</h3>
+        <p><i class="fas fa-map-marker-alt"></i> Sapporo</p>
+      </div>
+    <% end %>
+  </div>
+</div>
+<div class="container">
+  <h2 class="section-title">宿泊施設一覧</h2>
+  
+  <div class="room-grid">
+    <% @rooms.each do |room| %>
+      <%= link_to room_path(room), class: "room-card-link" do %>
+        <div class="room-card">
+          <div class="room-card-image">
+            <% if room.room_image.attached? %>
+              <%= image_tag room.room_image %>
+            <% else %>
+              <%= image_tag "default_icon.png" %>
+            <% end %>
+            <span class="room-card-price">¥<%= number_with_delimiter(room.price) %>〜</span>
+          </div>
+          
+          <div class="room-card-body">
+            <h3 class="room-card-title"><%= room.name %></h3>
+            <p class="room-card-address">
+              <i class="fas fa-map-marker-alt"></i> <%= room.address %>
+            </p>
+            <p class="room-card-text"><%= truncate(room.introduction, length: 40) %></p>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<br>

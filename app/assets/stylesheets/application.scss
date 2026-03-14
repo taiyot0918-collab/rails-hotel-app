@@ -1,0 +1,1215 @@
+// Sassy
+header {
+  display: flex;
+  justify-content: space-between; /* 両端に寄せる */
+  align-items: center;
+  background-color: #fff;
+  padding: 10px 50px;
+  box-shadow: 0 1px 10px rgba(0,0,0,0.1); /* 軽い影で浮かせる */
+  position: sticky; /* スクロールしても上についてくる */
+  top: 0;
+  z-index: 1000;
+}
+
+header nav ul {
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+header nav ul li {
+  margin-left: 20px;
+  list-style: none;
+}
+
+header nav a {
+  color: #484848;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+header nav a:hover {
+  border-bottom: 2px solid #484848; 
+}
+
+.search-section {
+  background-color: #e9ecef;
+  padding: 40px;
+  border-radius: 10px;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.search-section form {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  align-items: flex-end;
+}
+
+.search-section input[type="text"] {
+  width: 250px;
+}
+table {
+  border-collapse: separate;
+  border-spacing: 0 15px; /* 行と行の間に隙間を作る */
+  background: transparent;
+}
+
+tr {
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  border-radius: 10px;
+}
+
+th, td {
+  padding: 20px;
+  border: none; /* 枠線を消すと今風になります */
+}
+
+td:first-child { border-radius: 10px 0 0 10px; }
+td:last-child { border-radius: 0 10px 10px 0; }
+/* 「確認する」などの青ボタン */
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+/* 「予約を確定する」などの緑ボタン */
+input[type="submit"] {
+  background-color: #28a745;
+  font-weight: bold;
+  padding: 12px 30px;
+}
+/* 施設詳細ページのレイアウト */
+.room-show-container {
+  display: flex;
+  gap: 40px;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.room-details {
+  flex: 2; /* 左側を広く */
+}
+
+.room-image-large img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+.room-price {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ff385c; /* 少しAirbnb風の赤 */
+}
+
+/* 予約サイドバー */
+.reservation-sidebar {
+  flex: 1; /* 右側を少し狭く */
+}
+
+/* 予約ボックス本体 */
+.reservation-box {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 24px; /* 余白を少し広げてゆとりを持たせる */
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  position: sticky;
+  top: 100px;
+}
+
+.reservation-box h4 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 18px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+/* 入力ラベルを小さくスタイリッシュに */
+.field label {
+  display: block;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #484848;
+  margin-bottom: 4px;
+}
+
+/* 入力フォームを細く、整える */
+.form-control {
+  width: 100%;
+  padding: 8px 12px; /* 上下を少し削ってスリムに */
+  margin-bottom: 15px;
+  border: 1px solid #b0b0b0;
+  border-radius: 8px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+/* 予約ボタンをさらに目立たせる */
+.btn-reserve {
+  width: 100%;
+  background: linear-gradient(to right, #E61E4D 0%, #E31C5F 50%, #D70466 100%); /* グラデーションで高級感 */
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: opacity 0.2s ease;
+}
+
+.btn-reserve:hover {
+  opacity: 0.9;
+}
+.reservation-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.reservation-table th {
+  background-color: #f8f9fa;
+  padding: 15px;
+  font-size: 14px;
+  color: #666;
+}
+
+.reservation-table td {
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+  vertical-align: middle;
+}
+
+.table-img {
+  border-radius: 4px;
+  object-fit: cover;
+}
+body {
+  font-family: 'Inter', 'Noto Sans JP', sans-serif; /* モダンなフォント */
+  background-color: #fdfdfd; /* 真っ白より少しだけ温かみのある白 */
+  color: #222222;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* コンテナに余裕を持たせる */
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+header {
+  background-color: #fff;
+  height: 80px;
+  display: flex;
+  justify-content: space-between; /* ロゴとメニューを両端に分ける */
+  align-items: center;
+  border-bottom: 1px solid #ebebee; /* ここをスッキリ修正 */
+  box-shadow: 0 1px 12px rgba(0,0,0,0.05);
+  padding: 0 40px;
+}
+
+header .logo a {
+  color: #ff385c !important; /* Airbnb風のアクセントカラー */
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+/* 一覧のテーブルをカード風に */
+.room-index-table {
+  border-collapse: separate;
+  border-spacing: 0 20px; /* 行の間に隙間を作る */
+  width: 100%;
+}
+
+.room-index-table tr {
+  background: #fff;
+  transition: transform 0.2s ease;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.03);
+}
+
+.room-index-table tr:hover {
+  transform: translateY(-3px); /* 浮き上がる演出 */
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+}
+
+.room-index-table td {
+  padding: 20px;
+  border: 1px solid #f0f0f0;
+  border-style: solid none; /* 横の線だけ消す */
+}
+
+.room-index-table td:first-child {
+  border-left-style: solid;
+  border-radius: 12px 0 0 12px;
+}
+
+.room-index-table td:last-child {
+  border-right-style: solid;
+  border-radius: 0 12px 12px 0;
+}
+.btn-primary, input[type="submit"] {
+  background: #ff385c;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.3s cubic-bezier(0.2, 0, 0, 1);
+  display: inline-block;
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  background: #e31c5f;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+/* --- ドロップダウンメニューの装飾 --- */
+.nav-item-dropdown {
+  position: relative;
+  cursor: pointer;
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+  border-radius: 24px; /* カプセル型に */
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+}
+
+.nav-item-dropdown:hover {
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.header-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+  background-color: #eee;
+}
+
+.dropdown-content {
+  display: none; /* ホバーするまで隠す */
+  position: absolute;
+  right: 0;
+  top: 110%;
+  background-color: white;
+  min-width: 220px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  border-radius: 12px;
+  z-index: 1000;
+  overflow: hidden;
+  border: 1px solid #eee;
+}
+
+.nav-item-dropdown:hover .dropdown-content {
+  display: block; /* ホバーで表示 */
+}
+
+.dropdown-content a, .dropdown-logout {
+  display: block;
+  padding: 14px 20px;
+  text-decoration: none;
+  color: #222;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.2s;
+  text-align: left;
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown-content a:hover, .dropdown-logout:hover {
+  background-color: #f7f7f7;
+}
+
+/* ログアウトボタンだけ少し色を変える等の調整も可 */
+.dropdown-logout {
+  border-top: 1px solid #eee;
+  color: #ff385c;
+}
+/* セクション全体のタイトル */
+.section-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  border-bottom: 3px solid #ff7e67; /* オレンジのライン */
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+/* カードを横並びにするコンテナ */
+.area-container {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+/* カード単体の設定 */
+.area-card {
+  position: relative; /* 子要素(area-info)の基準になる */
+  width: 32%;
+  height: 400px;
+  overflow: hidden;
+  border-radius: 20px; /* 角丸 */
+  display: block;
+}
+
+.area-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 画像のアスペクト比を維持して埋める */
+  transition: transform 0.3s;
+}
+
+/* ホバー時に画像を少し大きくする演出 */
+.area-card:hover img {
+  transform: scale(1.1);
+}
+
+/* 画像の上の文字部分 */
+.area-info {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  color: white;
+  text-shadow: 1px 1px 5px rgba(0,0,0,0.5); /* 文字を見やすくするための影 */
+}
+
+.area-info h3 {
+  font-size: 28px;
+  margin: 0;
+  font-weight: bold;
+}
+
+.area-info p {
+  font-size: 18px;
+  margin: 5px 0 0;
+}
+/* カードにマウスを乗せた時、画像を少し拡大し、少し暗くして文字を際立たせる */
+.area-card:hover img {
+  transform: scale(1.1);
+  filter: brightness(80%);
+}
+
+.area-card {
+  transition: all 0.3s ease;
+}
+
+/* グリッドレイアウト：3列または4列で並べる */
+.room-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+  padding: 20px 0;
+}
+
+.room-card-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.room-card {
+  background: #fff;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+}
+
+/* ホバー時に浮き上がるアニメーション */
+.room-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+}
+
+.room-card-image {
+  position: relative;
+  height: 200px;
+}
+
+.room-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 画像の右下に価格タグを置く */
+.room-card-price {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: rgba(255, 126, 103, 0.9); /* コーラルオレンジ */
+  color: #fff;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.room-card-body {
+  padding: 15px;
+}
+
+.room-card-title {
+  font-size: 1.15rem;
+  margin: 0 0 8px 0;
+  font-weight: bold;
+  color: #333;
+}
+
+.room-card-address {
+  font-size: 0.85rem;
+  color: #777;
+  margin-bottom: 10px;
+}
+
+.room-card-text {
+  font-size: 0.9rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* シンプルな戻るボタンのスタイル */
+.simple-back-link {
+  display: inline-block;
+  padding: 10px 24px;
+  background-color: #ffffff; /* 白背景 */
+  color: #666666; /* 落ち着いたグレー */
+  text-decoration: none;
+  border: 1px solid #cccccc; /* 薄いグレーの枠線 */
+  border-radius: 4px; /* 緩やかな角丸 */
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+/* ホバー時は少しだけ背景を濃くして反応を出す */
+.simple-back-link:hover {
+  background-color: #f5f5f5;
+  border-color: #999999;
+  color: #333333;
+}
+
+.navigation-box {
+  margin: 20px 0;
+}
+
+/* 背景全体を少しグレーにして、カードを浮かせる */
+.auth-wrapper {
+  background-color: #f4f7f6;
+  min-height: calc(100vh - 60px); /* ヘッダー分を引く */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* 白い入力ボックス（カード） */
+.auth-card {
+  background: #ffffff;
+  padding: 40px;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+.auth-title {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+/* 入力フォームのスタイル */
+.field {
+  margin-bottom: 20px;
+}
+
+.field label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  font-size: 14px;
+  color: #555;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-sizing: border-box; /* paddingで幅がズレないように */
+  transition: border-color 0.3s;
+}
+
+.form-input:focus {
+  border-color: #ff7e67; /* テーマカラー（オレンジ系）に合わせる */
+  outline: none;
+}
+
+/* 送信ボタン */
+.btn-submit {
+  width: 100%;
+  padding: 14px;
+  background-color: #ff7e67;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-submit:hover {
+  background-color: #e66d58;
+}
+
+.auth-links {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 13px;
+}
+
+.auth-links a {
+  color: #777;
+  text-decoration: none;
+}
+
+.auth-links a:hover {
+  text-decoration: underline;
+}
+
+.no-results-card {
+  background: #fff;
+  border-radius: 15px;
+  padding: 60px 20px;
+  text-align: center;
+  border: 1px dashed #ccc; /* 枠線を点線にして「空っぽ感」を出す */
+  margin: 20px 0;
+}
+
+.no-results-card p {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.no-results-card .sub-text {
+  font-size: 0.9rem;
+  color: #777;
+  margin-bottom: 30px;
+}
+
+/* 管理用ボタンの並び */
+.room-admin-menu {
+  margin: 20px 0;
+  display: flex;
+  gap: 15px;
+}
+
+.btn-edit {
+  background-color: #fff;
+  color: #4a90e2;
+  border: 1px solid #4a90e2;
+  padding: 8px 16px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.btn-delete-trigger {
+  background-color: #fff;
+  color: #e74c3c;
+  border: 1px solid #e74c3c;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* モーダルの装飾 */
+.modal-overlay {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;
+}
+
+.modal-content {
+  background: white; padding: 30px; border-radius: 12px; width: 90%; max-width: 400px;
+}
+
+.modal-room-preview {
+  margin: 20px 0; text-align: left; background: #f9f9f9; padding: 15px; border-radius: 8px;
+}
+
+.modal-img { width: 100%; height: 150px; object-fit: cover; border-radius: 4px; margin-bottom: 10px; }
+
+.warning-text { color: #e74c3c; font-size: 12px; margin-bottom: 20px; text-align: center; }
+
+.modal-actions { display: flex; justify-content: space-between; }
+
+/* 予約一覧全体 */
+.reservation-container {
+  padding-bottom: 50px;
+}
+
+/* グリッドレイアウト（画面幅に合わせて自動調整） */
+.reservation-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
+  margin-top: 30px;
+}
+
+/* 予約カード本体 */
+.reservation-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  overflow: hidden;
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+}
+
+/* カード画像エリア */
+.res-card-image {
+  position: relative;
+  height: 180px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+/* 「予約確定」タグ */
+.res-status-tag {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: #2ecc71; /* 緑色 */
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* カードボディ */
+.res-card-body {
+  padding: 20px;
+}
+
+.res-room-name {
+  font-size: 18px;
+  margin-bottom: 15px;
+  
+  a {
+    color: #333;
+    text-decoration: none;
+    &:hover { color: #4a90e2; }
+  }
+}
+
+/* 日付情報のデザイン（矢印付き） */
+.res-date-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f8f9fa;
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.res-date-box {
+  text-align: center;
+  .label { font-size: 10px; color: #888; display: block; }
+  .date { font-size: 14px; font-weight: bold; color: #333; }
+}
+
+.res-arrow {
+  color: #ccc;
+  font-size: 18px;
+}
+
+/* メタ情報（人数、住所） */
+.res-meta-info {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 20px;
+  p { margin: 5px 0; }
+  i { width: 18px; color: #aaa; }
+}
+
+/* カードのアクションボタン */
+.res-card-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.btn-edit-res {
+  flex: 1;
+  text-align: center;
+  background: #fff;
+  color: #4a90e2;
+  border: 1px solid #4a90e2;
+  padding: 8px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 14px;
+  &:hover { background: #f0f7ff; }
+}
+
+.btn-delete-res-trigger {
+  flex: 1;
+  background: #fff;
+  color: #e74c3c;
+  border: 1px solid #e74c3c;
+  padding: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  &:hover { background: #fff5f5; }
+}
+
+/* 削除モーダルの微調整 */
+.res-delete-modal {
+  .modal-res-preview {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    text-align: left;
+  }
+  .modal-img-sm {
+    width: 60px; height: 60px; object-fit: cover; border-radius: 4px;
+  }
+  .modal-room-name { font-weight: bold; margin-bottom: 5px; }
+  .modal-res-dates { font-size: 13px; color: #666; }
+}
+
+/* 予約がない場合の表示 */
+.no-reservations {
+  text-align: center;
+  padding: 100px 20px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  margin-top: 30px;
+}
+/* --- 全ページ共通のレスポンシブ土台 --- */
+
+/* 1. 全てのコンテナに左右の余白を持たせる */
+.container, .room-show-container, .auth-wrapper, .reservation-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px; /* スマホで端に文字がくっつくのを防ぐ */
+  box-sizing: border-box;
+}
+
+/* 2. 画像がはみ出さないようにする */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 3. グリッド（一覧系）の共通スマホ対応 */
+.room-grid, .reservation-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* デフォルトは1列 */
+  gap: 20px;
+}
+
+/* タブレット以上（600px〜） */
+@media (min-width: 600px) {
+  .room-grid, .reservation-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2列 */
+  }
+}
+
+/* デスクトップ以上（1000px〜） */
+@media (min-width: 1000px) {
+  .room-grid, .reservation-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3列 */
+  }
+}
+
+/* 4. フォームや入力欄のスマホ対応 */
+input[type="text"], input[type="number"], input[type="date"], textarea, select {
+  width: 100% !important; /* スマホで横幅いっぱいに */
+  box-sizing: border-box;
+  font-size: 16px; /* iPhoneで入力時にズームされるのを防ぐサイズ */
+}
+
+.room-show-container {
+  display: flex;
+  flex-direction: column; /* 基本は縦並び */
+  gap: 30px;
+}
+
+/* PCサイズになったら横並びにする */
+@media (min-width: 900px) {
+  .room-show-container {
+    flex-direction: row; /* 横並び */
+    align-items: flex-start;
+  }
+  
+  .room-details {
+    flex: 2; /* 左側を広く */
+  }
+  
+  .reservation-sidebar {
+    flex: 1; /* 右側（予約フォーム）を固定幅気味に */
+    position: sticky; /* スクロールについてくる */
+    top: 20px;
+  }
+}
+
+/* コンテナ全体 */
+.room-show-container {
+  display: flex;
+  flex-direction: column; /* スマホでは縦並び */
+  gap: 30px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* 左側：メイン（画像と詳細） */
+.room-main-content {
+  flex: 2; /* PCで広く取る */
+  width: 100%;
+}
+
+/* 右側：サイドバー（予約フォーム） */
+.room-sidebar {
+  flex: 1; /* PCで狭く取る */
+  width: 100%;
+}
+
+/* 画像が暴走しないための設定 */
+.room-image-large {
+  width: 100%;
+  max-height: 450px; /* ここで高さを止める */
+  overflow: hidden;
+  border-radius: 12px;
+  margin-bottom: 20px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 縦横比を維持して枠を埋める */
+  }
+}
+
+/* 予約フォームをスクロールに追従させる（PCのみ） */
+.reservation-card-sticky {
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  border: 1px solid #eee;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+/* --- レスポンシブ：900px以上のときだけ横並び --- */
+@media (min-width: 900px) {
+  .room-show-container {
+    flex-direction: row; /* 横並び */
+    align-items: flex-start;
+  }
+  
+  .reservation-card-sticky {
+    position: sticky;
+    top: 100px; /* ヘッダーに被らない位置 */
+  }
+}
+
+/* --- ヘッダー全体の調整 --- */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #fff;
+  border-bottom: 1px solid #eee;
+  min-height: 70px; /* 高さを一定に保つ */
+  box-sizing: border-box;
+}
+
+nav ul {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 10px; /* 要素間の隙間 */
+}
+
+/* --- スマホ(iPhone)サイズ用の微調整 --- */
+@media (max-width: 480px) {
+  header {
+    padding: 10px;
+  }
+
+  .logo a {
+    font-size: 20px !important; /* ロゴを少し小さく */
+  }
+
+  nav ul {
+    gap: 5px;
+  }
+
+  /* ログイン・新規登録ボタンのサイズを適正化 */
+  nav ul li a {
+    font-size: 13px;
+    padding: 8px 12px;
+    display: inline-block;
+    white-space: nowrap; /* 改行を禁止して縦伸びを防ぐ */
+    line-height: 1;
+    text-align: center;
+  }
+
+  /* 赤い新規登録ボタン（btn-primary）の暴走を止める */
+  .btn-primary {
+    background-color: #ff385c !important; /* Airbnb風の赤 */
+    color: #fff !important;
+    border-radius: 8px;
+    font-weight: bold;
+    height: auto !important; /* 縦に伸びるのを防ぐ */
+    margin: 0;
+  }
+}
+
+/* おすすめエリアのコンテナ */
+.area-container {
+  display: grid;
+  /* スマホでは2列にする */
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 12px;
+  padding: 10px;
+}
+
+/* カード自体の設定 */
+.area-card {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 4; /* 縦横比を固定（重要！） */
+  border-radius: 12px;
+  overflow: hidden;
+  text-decoration: none;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 画像をつぶさず切り抜いて収める */
+  }
+}
+
+/* 画像の上の文字情報 */
+.area-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px 10px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.7));
+  color: #fff;
+
+  h3 { margin: 0; font-size: 16px; }
+  p { margin: 0; font-size: 11px; opacity: 0.9; }
+}
+
+/* PCサイズ(768px以上)では4列に戻す */
+@media (min-width: 768px) {
+  .area-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.room-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* iPhoneは2列 */
+  gap: 15px;
+  padding: 10px;
+}
+
+.room-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  overflow: hidden;
+  height: 100%;
+}
+
+.room-card-image {
+  height: 120px; /* スマホ用に少し高さを抑える */
+  width: 100%;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+/* PCサイズ(1000px以上) */
+@media (min-width: 1000px) {
+  .room-grid {
+    grid-template-columns: repeat(4, 1fr); /* PCは4列 */
+  }
+  .room-card-image {
+    height: 160px;
+  }
+}
+
+/* ヒーロー（検索）セクションの背景設定 */
+.main-hero-background {
+  /* ここでお好みの背景画像を指定します */
+  background-image: image-url('room_imge.png');
+  background-size: cover;
+  background-position: center center;
+  padding: 80px 20px;
+  text-align: center;
+  border-radius: 0 0 30px 30px;
+  margin-bottom: 40px;
+}
+
+/* 半透明のカプセル */
+.hero-translucent-capsule {
+  background-color: rgba(255, 255, 255, 0.7); /* 半透明の白 */
+  backdrop-filter: blur(5px); /* 背景を少しぼかす効果（対応ブラウザのみ） */
+  padding: 40px 30px;
+  border-radius: 30px;
+  max-width: 800px;
+  margin: 0 auto;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+}
+
+.hero-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+/* 一体型の検索バー */
+.search-bar-integrated {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 50px;
+  padding: 8px 10px 8px 25px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  transition: box-shadow 0.3s;
+
+  &:focus-within {
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  }
+}
+
+.search-input-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  
+  i { color: #ff385c; margin-right: 12px; font-size: 16px; }
+  
+  input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 15px;
+    padding: 10px 0;
+    background: transparent;
+    &::placeholder { color: #aaa; }
+  }
+}
+
+/* 区切り線 */
+.search-v-line {
+  width: 1px;
+  height: 30px;
+  background: #eee;
+  margin: 0 15px;
+}
+
+/* 検索ボタン */
+.hero-search-btn {
+  background: #ff385c;
+  color: #fff;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:hover { background: #e31c5f; }
+}
+
+/* --- iPhoneサイズのレスポンシブ対応 --- */
+@media (max-width: 600px) {
+  .main-hero-background { padding: 40px 15px; }
+  
+  .hero-translucent-capsule {
+    padding: 25px 15px;
+    border-radius: 20px;
+  }
+
+  .search-bar-integrated {
+    flex-direction: column;
+    border-radius: 15px;
+    padding: 15px;
+  }
+
+  .search-v-line { display: none; }
+
+  .search-input-wrapper {
+    width: 100%;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+  }
+
+  .hero-search-btn {
+    width: 100%;
+    padding: 15px;
+  }
+}

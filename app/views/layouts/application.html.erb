@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Hotel App" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+ <body>
+    <header>
+      <%# 左側：サイトのロゴ（名前） %>
+      <div class="logo">
+        <%= link_to "Hotel App", root_path, style: "font-size: 24px; font-weight: bold; color: #333; text-decoration: none;" %>
+      </div>
+
+      <%# 右側：ナビゲーションメニュー %>
+      <nav>
+        <ul>
+          <% if user_signed_in? %>
+            <%# 外側にあった「施設登録」を削除し、「予約済み一覧」のみ残す（またはこれも中に入れる） %>
+            <li><%= link_to "予約済み一覧", reservations_path %></li>
+
+            <li class="nav-item-dropdown">
+              <div class="user-menu-trigger">
+                <% if current_user.icon_image.attached? %>
+                  <%= image_tag current_user.icon_image, class: "header-avatar" %>
+                <% else %>
+                  <%= image_tag "default_icon.png", class: "header-avatar" %>
+                <% end %>
+                <span class="user-name"><%= current_user.name %></span>
+              </div>
+
+              <div class="dropdown-content">
+                <%= link_to "新しい施設を登録する", new_room_path %>
+                <%= link_to "施設投稿一覧", posts_rooms_path %>
+                <hr style="border: 0; border-top: 1px solid #eee; margin: 0;">
+                <%= link_to "プロフィール編集", edit_user_path(current_user) %>
+                <%= link_to "アカウント設定", edit_user_registration_path %>
+                <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "dropdown-logout" %>
+              </div>
+            </li>
+          <% else %>
+            <li><%= link_to "ログイン", new_user_session_path %></li>
+            <li><%= link_to "新規登録", new_user_registration_path, class: "btn-primary" %></li>
+          <% end %>
+        </ul>
+      </nav>
+    </header>
+
+    <%# ここから下が各ページのコンテンツ %>
+    <%= yield %>
+  </body>
+</html>

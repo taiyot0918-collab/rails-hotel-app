@@ -1,0 +1,41 @@
+<div class="container">
+  <h2 class="section-title">
+    <% if params[:keyword].present? %>
+      「<%= params[:keyword] %>」の検索結果
+    <% else %>
+      宿泊施設一覧
+    <% end %>
+    （<%= @rooms.count %>件）
+  </h2>
+
+  <% if @rooms.any? %>
+    <% # 施設がある場合はいつものカードデザイン %>
+    <div class="room-grid">
+      <% @rooms.each do |room| %>
+        <%= link_to room_path(room), class: "room-card-link" do %>
+          <div class="room-card">
+            <div class="room-card-image">
+              <% if room.room_image.attached? %>
+                <%= image_tag room.room_image %>
+              <% else %>
+                <%= image_tag "default_icon.png" %>
+              <% end %>
+              <span class="room-card-price">¥<%= number_with_delimiter(room.price) %>〜</span>
+            </div>
+            <div class="room-card-body">
+              <h3 class="room-card-title"><%= room.name %></h3>
+              <p class="room-card-address"><%= room.address %></p>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  <% else %>
+    <% # 0件だった場合も、同じデザイン枠の中でメッセージを表示 %>
+    <div class="no-results-card">
+      <p>条件に一致する施設は見つかりませんでした。</p>
+      <p class="sub-text">キーワードを変えて再度検索するか、一覧に戻ってください。</p>
+      <%= link_to "全ての施設を見る", rooms_path, class: "btn-back" %>
+    </div>
+  <% end %>
+</div>

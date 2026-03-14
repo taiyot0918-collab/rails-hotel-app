@@ -1,0 +1,24 @@
+<div class="container profile-edit">
+  <h2>プロフィール編集</h2>
+
+  <%= form_with model: @user, local: true do |f| %>
+    <div class="field">
+      <%= f.label :icon_image, "アイコン画像" %>
+      <%= f.file_field :icon_image %>
+    </div>
+
+    <div class="field">
+      <%= f.label :name, "名前" %>
+      <%= f.text_field :name, class: "form-control" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :introduction, "自己紹介" %>
+      <%= f.text_area :introduction, class: "form-control", rows: 5 %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "変更を保存する", class: "btn-primary" %>
+    </div>
+  <% end %>
+</div>

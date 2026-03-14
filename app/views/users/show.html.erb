@@ -1,0 +1,21 @@
+<div class="container user-show">
+  <h2>アカウント情報</h2>
+  
+  <div class="user-info-card">
+    <div class="info-row">
+      <strong>名前:</strong> <%= @user.name %>
+    </div>
+    <div class="info-row">
+      <strong>メールアドレス:</strong> <%= @user.email %>
+    </div>
+    <div class="info-row">
+      <strong>パスワード:</strong> *********
+    </div>
+    <div class="info-row">
+      <strong>自己紹介:</strong>
+      <p><%= @user.introduction %></p>
+    </div>
+  </div>
+
+  <%= link_to "プロフィールを編集する", edit_user_path(@user), class: "btn-primary" %>
+</div>
